@@ -26,7 +26,7 @@ inThisBuild(List(
     tlSitePublishBranch := Some(mainBranch),
 ))
 
-lazy val root = tlCrossRootProject.aggregate(core)
+lazy val root = tlCrossRootProject.aggregate(core, scalatest)
 
 lazy val commonSettings = Seq(
     headerLicenseStyle := HeaderLicenseStyle.SpdxSyntax,
@@ -40,10 +40,20 @@ lazy val core = crossProject(JVMPlatform, JSPlatform, NativePlatform)
     .crossType(CrossType.Full)
     .in(file("core"))
     .settings(
-        name := "golden-scala",
+        name := "golden-core",
+        commonSettings,
+    )
+
+lazy val scalatest = crossProject(JVMPlatform, JSPlatform, NativePlatform)
+    .withoutSuffixFor(JVMPlatform)
+    .crossType(CrossType.Full)
+    .dependsOn(core)
+    .in(file("scalatest"))
+    .settings(
+        name := "golden-scalatest",
         commonSettings,
         libraryDependencies ++= Seq(
-
+            "org.scalatest" %%% "scalatest" % "3.2.17"
         )
     )
 
