@@ -15,7 +15,7 @@ inThisBuild(List(
     startYear := Some(2024),
     licenses := List("BSD-3-Clause" -> url("https://opensource.org/licenses/BSD-3-Clause")),
 
-    crossScalaVersions := Seq(Scala213, Scala212, Scala3),
+    crossScalaVersions := Seq(Scala213, /*Scala212,*/ Scala3),
     scalaVersion := Scala213,
 
     tlCiReleaseBranches := Seq.empty, //Seq(mainBranch),
@@ -34,7 +34,7 @@ lazy val commonSettings = Seq(
     resolvers ++= Opts.resolver.sonatypeOssReleases,
 )
 
-lazy val core = crossProject(JVMPlatform, JSPlatform, NativePlatform)
+lazy val core = crossProject(JVMPlatform, NativePlatform)
     .withoutSuffixFor(JVMPlatform)
     .crossType(CrossType.Full)
     .in(file("core"))
@@ -43,7 +43,7 @@ lazy val core = crossProject(JVMPlatform, JSPlatform, NativePlatform)
         commonSettings,
     )
 
-lazy val scalatest = crossProject(JVMPlatform, JSPlatform, NativePlatform)
+lazy val scalatest = crossProject(JVMPlatform, NativePlatform)
     .withoutSuffixFor(JVMPlatform)
     .crossType(CrossType.Full)
     .dependsOn(core)
@@ -61,5 +61,5 @@ lazy val docs = project.in(file("site"))
     .settings(
         tlFatalWarnings := githubIsWorkflowBuild.value,
         tlSiteKeepFiles := false, // FIXME: disable
-        
+
     )

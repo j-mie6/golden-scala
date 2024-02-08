@@ -5,7 +5,9 @@
  */
 package test.golden.scalatest
 
-import org.scalatest.{Args, Status, Suite}
+import org.scalatest.Args
+import org.scalatest.Status
+import org.scalatest.Suite
 
 trait HasGoldenConfig extends Suite {
     private [golden] var goldenConfig: GoldenConfig = GoldenConfig.default
