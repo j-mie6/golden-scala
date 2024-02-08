@@ -18,12 +18,11 @@ inThisBuild(List(
     crossScalaVersions := Seq(Scala213, Scala212, Scala3),
     scalaVersion := Scala213,
 
-    // publish website from this branch
-    tlCiReleaseBranches := Seq(mainBranch),
+    tlCiReleaseBranches := Seq.empty, //Seq(mainBranch),
     tlCiScalafmtCheck := false,
     tlCiHeaderCheck := true,
 
-    tlSitePublishBranch := Some(mainBranch),
+    tlSitePublishBranch := None, //Some(mainBranch),
 ))
 
 lazy val root = tlCrossRootProject.aggregate(core, scalatest)
@@ -59,3 +58,8 @@ lazy val scalatest = crossProject(JVMPlatform, JSPlatform, NativePlatform)
 
 lazy val docs = project.in(file("site"))
     .enablePlugins(TypelevelSitePlugin)
+    .settings(
+        tlFatalWarnings := githubIsWorkflowBuild.value,
+        tlSiteKeepFiles := false, // FIXME: disable
+        
+    )

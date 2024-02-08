@@ -8,6 +8,6 @@ To use the latest version, include the following in your `build.sbt`:
 
 ```scala
 libraryDependencies ++= Seq(
-  "com.github.j-mie6" %% "golden-scala" % "@VERSION@"
+  "com.github.j-mie6" %% "golden-core" % "@VERSION@"
 )
 ```
