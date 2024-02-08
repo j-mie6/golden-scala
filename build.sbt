@@ -5,6 +5,8 @@ val Scala3 = "3.3.1"
 
 val mainBranch = "main"
 
+Global / onChangedBuildSource := ReloadOnSourceChanges
+
 inThisBuild(List(
     tlBaseVersion := "0.0",
 
@@ -26,14 +28,22 @@ inThisBuild(List(
 
 lazy val root = tlCrossRootProject.aggregate(core)
 
+lazy val commonSettings = Seq(
+    headerLicenseStyle := HeaderLicenseStyle.SpdxSyntax,
+    headerEmptyLine := false,
+
+    resolvers ++= Opts.resolver.sonatypeOssReleases,
+)
+
 lazy val core = crossProject(JVMPlatform, JSPlatform, NativePlatform)
     .withoutSuffixFor(JVMPlatform)
     .crossType(CrossType.Full)
     .in(file("core"))
     .settings(
         name := "golden-scala",
+        commonSettings,
         libraryDependencies ++= Seq(
-            
+
         )
     )
 
