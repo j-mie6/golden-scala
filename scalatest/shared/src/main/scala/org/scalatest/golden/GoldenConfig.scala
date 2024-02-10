@@ -10,10 +10,17 @@ case object GoldenAccept extends GoldenMode
 case object GoldenGenerate extends GoldenMode
 case object GoldenCheck extends GoldenMode
 
+sealed trait GoldenDiff
+case object GoldenScalactic extends GoldenDiff
+
 // this is probably core!
 final case class GoldenConfig(
-    mode: GoldenMode
+    mode: GoldenMode,
+    diff: GoldenDiff,
 )
 object GoldenConfig {
-    val default = GoldenConfig(mode = GoldenCheck)
+    val default = GoldenConfig(
+        mode = GoldenCheck,
+        diff = GoldenScalactic,
+    )
 }

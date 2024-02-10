@@ -19,6 +19,7 @@ trait HasGoldenConfig extends Suite {
             case Some("generate") => GoldenGenerate
             case _ => GoldenCheck
         }
+        // TODO: diffing modes
         goldenConfig = goldenConfig.copy(mode = goldenMode)
         super.run(testName, args)
     }
