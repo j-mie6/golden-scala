@@ -9,13 +9,13 @@ import org.scalatest.matchers.EqualMatchResult
 import org.scalatest.matchers.MatchResult
 import org.scalatest.matchers.Matcher
 
-import scala.io.Source
-import scala.util.Try
-import scala.util.Success
-import scala.util.Failure
-import java.io.FileWriter
-import java.io.File
 import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
+import scala.io.Source
+import scala.util.Failure
+import scala.util.Success
+import scala.util.Try
 
 // TODO: actually, it would be good if the status' of the tests can change
 // depending on mode:
