@@ -25,7 +25,7 @@ inThisBuild(List(
     tlSitePublishBranch := None, //Some(mainBranch),
 ))
 
-lazy val root = tlCrossRootProject.aggregate(core, scalatest)
+lazy val root = tlCrossRootProject.aggregate(/*core, */scalatest)
 
 lazy val commonSettings = Seq(
     headerLicenseStyle := HeaderLicenseStyle.SpdxSyntax,
@@ -34,19 +34,19 @@ lazy val commonSettings = Seq(
     resolvers ++= Opts.resolver.sonatypeOssReleases,
 )
 
-lazy val core = crossProject(JVMPlatform, NativePlatform)
+/*lazy val core = crossProject(JVMPlatform, NativePlatform)
     .withoutSuffixFor(JVMPlatform)
     .crossType(CrossType.Full)
     .in(file("core"))
     .settings(
         name := "golden-core",
         commonSettings,
-    )
+    )*/
 
 lazy val scalatest = crossProject(JVMPlatform, NativePlatform)
     .withoutSuffixFor(JVMPlatform)
     .crossType(CrossType.Full)
-    .dependsOn(core)
+    //.dependsOn(core)
     .in(file("scalatest"))
     .settings(
         name := "golden-scalatest",
@@ -61,5 +61,4 @@ lazy val docs = project.in(file("site"))
     .settings(
         tlFatalWarnings := githubIsWorkflowBuild.value,
         tlSiteKeepFiles := false, // FIXME: disable
-
     )
