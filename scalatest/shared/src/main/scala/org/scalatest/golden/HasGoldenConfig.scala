@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
-package test.golden.scalatest
+package org.scalatest.golden
 
 import org.scalatest.Args
 import org.scalatest.Status
@@ -13,10 +13,13 @@ trait HasGoldenConfig extends Suite {
     private [golden] var goldenConfig: GoldenConfig = GoldenConfig.default
 
     abstract override def run(testName: Option[String], args: Args): Status = {
-        val goldenAccept = args.configMap.getOptional[String]("golden.accept")
-                                         .flatMap(_.toBooleanOption)
-                                         .getOrElse(false)
-        goldenConfig = goldenConfig.copy(accept = goldenAccept)
+        val goldenMode = args.configMap.getOptional[String]("golden.mode") match {
+            case Some("accept") => GoldenAccept
+            //case Some("check") => GoldenCheck
+            case Some("generate") => GoldenGenerate
+            case _ => GoldenCheck
+        }
+        goldenConfig = goldenConfig.copy(mode = goldenMode)
         super.run(testName, args)
     }
 }
