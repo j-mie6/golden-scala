@@ -33,7 +33,9 @@ trait GoldenMatchers extends HasGoldenConfig {
 
         private def generate(left: String) = {
             val res = Try {
-                val buff = new BufferedWriter(new FileWriter(new File(filename)))
+                val file = new File(filename)
+                file.getParentFile().mkdirs()
+                val buff = new BufferedWriter(new FileWriter(file))
                 buff.write(left)
                 buff.close()
             }
