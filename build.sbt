@@ -1,7 +1,7 @@
 
-val Scala213 = "2.13.12"
+val Scala213 = "2.13.14"
 val Scala212 = "2.12.18"
-val Scala3 = "3.3.1"
+val Scala3 = "3.3.3"
 
 val mainBranch = "main"
 
@@ -52,7 +52,7 @@ lazy val scalatest = crossProject(JVMPlatform, NativePlatform)
         name := "golden-scalatest",
         commonSettings,
         libraryDependencies ++= Seq(
-            "org.scalatest" %%% "scalatest" % "3.2.17"
+            "org.scalatest" %%% "scalatest" % "3.2.19"
         )
     )
 
