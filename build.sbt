@@ -21,6 +21,7 @@ inThisBuild(List(
     tlCiReleaseBranches := Seq(mainBranch),
     tlCiScalafmtCheck := false,
     tlCiHeaderCheck := true,
+    tlJdkRelease := Some(11),
 
     tlSitePublishBranch := None, //Some(mainBranch),
 ))
